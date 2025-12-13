@@ -21,14 +21,13 @@ const problem: Table = {
     ],
     z_row: [-8, -6, 0, 0, 0, 0]
 }
-
 const solution = solve_simplex(problem);
 ```
 
 ## Algorithm
-1. Find most negative (max) or positive (min) coefficient in z-row → entering variable
-2. Minimum ratio test (b/coefficient, positive only) → leaving variable
-3. Pivot: normalize row, eliminate column
+1. Find entering variable (most negative in z-row)
+2. Minimum ratio test → leaving variable
+3. Pivot and normalize
 4. Repeat until optimal
 
 ## Functions
@@ -36,3 +35,39 @@ const solution = solve_simplex(problem);
 - `verify_row_and_perform_header_swap()` - Minimum ratio test
 - `compute_row_reduction()` - Gauss-Jordan elimination
 - `solve_simplex()` - Main solver
+
+---
+
+# M/M/s Queue (Erlang-C)
+TypeScript implementation for capacity planning and server sizing.
+
+## Structure
+```typescript
+interface QueueMetrics {
+  lambda: number;  // arrival rate (customers/hour)
+  mu: number;      // service rate per server (customers/hour)
+  s: number;       // number of servers
+}
+```
+
+## Usage
+```typescript
+// Example: 1200 trades/hour, 3 seconds per trade, 2 workers
+const lambda = 1200;
+const mu = 1200;  // 1/(3/3600) customers/hour per server
+const s = 2;
+
+const rho = compute_utilization(lambda, mu, s);  // 0.5
+const decision = should_scale(lambda, mu, s);
+```
+
+## Algorithm
+1. Calculate ρ = λ / (s × μ)
+2. If ρ > 0.8 → add servers
+3. If ρ < 0.3 → remove servers
+4. Target: 0.7 ≤ ρ ≤ 0.8
+
+## Functions
+- `compute_utilization()` - Calculate ρ
+- `should_scale()` - Auto-scaling decision
+- `factorial()` - Helper for Erlang-C
