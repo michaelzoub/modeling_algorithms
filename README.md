@@ -44,8 +44,8 @@ TypeScript implementation for capacity planning and server sizing.
 ## Structure
 ```typescript
 interface QueueMetrics {
-  lambda: number;  // arrival rate (customers/hour)
-  mu: number;      // service rate per server (customers/hour)
+  lambda: number;  // arrival rate (transactions/hour)
+  mu: number;      // service rate per server (transactions/hour)
   s: number;       // number of servers
 }
 ```
@@ -54,7 +54,7 @@ interface QueueMetrics {
 ```typescript
 // Example: 1200 trades/hour, 3 seconds per trade, 2 workers
 const lambda = 1200;
-const mu = 1200;  // 1/(3/3600) customers/hour per server
+const mu = 1200;  // 1/(3/3600) transactions/hour per server
 const s = 2;
 
 const rho = compute_utilization(lambda, mu, s);  // 0.5
