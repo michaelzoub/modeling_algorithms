@@ -39,7 +39,7 @@ const solution = solve_simplex(problem);
 ---
 
 # M/M/s Queue (Erlang-C)
-TypeScript implementation for capacity planning and server sizing.
+TypeScript implementation for capacity planning and server sizing. Useful to determine needs for load balancers during high frequency trading.
 
 ## Structure
 ```typescript
@@ -63,9 +63,9 @@ const decision = should_scale(lambda, mu, s);
 
 ## Algorithm
 1. Calculate ρ = λ / (s × μ)
-2. If ρ > 0.8 → add servers
+2. If ρ > 0.7 → add servers
 3. If ρ < 0.3 → remove servers
-4. Target: 0.7 ≤ ρ ≤ 0.8
+4. Target: 0.5 ≤ ρ ≤ 0.7
 
 ## Functions
 - `compute_utilization()` - Calculate ρ
